@@ -1,5 +1,7 @@
 CC=gcc
-CFLAGS=-I.
+IDIR=../include
+SDIR=../src
+CFLAGS=-I $(IDIR)
 
-holamake: holamake.o holafunc.o
-	$(CC) -o holamake holamake.o holafunc.o -I.
+holamake: $(SDIR)/holamake.o $(SDIR)/holafunc.o
+	$(CC) -o holamake $(SDIR)/holamake.o $(SDIR)/holafunc.o $(CFLAGS)
