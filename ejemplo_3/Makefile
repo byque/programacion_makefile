@@ -1,9 +1,11 @@
 CC=gcc
-CFLAGS=-I.
-DEPS = holamake.h
+IDIR=../include
+SDIR=../src
+CFLAGS=-I $(IDIR)
+DEPS = $(IDIR)/holamake.h
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-holamake: holamake.o holafunc.o
-	gcc -o holamake holamake.o holafunc.o -I.
+holamake: $(SDIR)/holamake.o $(SDIR)/holafunc.o
+	$(CC) -o holamake $(SDIR)/holamake.o $(SDIR)/holafunc.o $(CFLAGS)
