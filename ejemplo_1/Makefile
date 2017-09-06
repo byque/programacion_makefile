@@ -1,2 +1,2 @@
-holamake: holamake.c holafunc.c
-	gcc -o holamake holamake.c holafunc.c -I.
+holaregla: holamain.c holafuncion.c
+	gcc -o holabinario holamain.c holafuncion.c -I.
