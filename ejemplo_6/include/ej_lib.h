@@ -1,0 +1,1 @@
+double promedio(double, double);
