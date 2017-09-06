@@ -7,16 +7,16 @@ ODIR=../src/obj
 
 LIBS=-lm
 
-_DEPS = holamake.h
+_DEPS = holaheader.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = holamake.o holafunc.o
+_OBJ = holamain.o holafuncion.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-holamake: $(OBJ)
+holabinario: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean

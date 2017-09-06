@@ -3,5 +3,5 @@ IDIR=../include
 SDIR=../src
 CFLAGS=-I $(IDIR)
 
-holamake: $(SDIR)/holamake.o $(SDIR)/holafunc.o
-	$(CC) -o holamake $(SDIR)/holamake.o $(SDIR)/holafunc.o $(CFLAGS)
+holaregla: $(SDIR)/holamain.o $(SDIR)/holafuncion.o
+	$(CC) -o holabinario $(SDIR)/holamain.o $(SDIR)/holafuncion.o $(CFLAGS)

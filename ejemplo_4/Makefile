@@ -2,11 +2,11 @@ CC=gcc
 IDIR=../include
 SDIR=../src
 CFLAGS=-I $(IDIR)
-DEPS = $(IDIR)/holamake.h
-OBJ = $(SDIR)/holamake.o $(SDIR)/holafunc.o
+DEPS = $(IDIR)/holaheader.h
+OBJ = $(SDIR)/holamain.o $(SDIR)/holafuncion.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-holamake: $(OBJ)
+holabinario: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
