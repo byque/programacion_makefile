@@ -1,6 +1,6 @@
 CC=gcc
 IDIR=../include
-CFLAGS=-I $(IDIR)
+CFLAGS = $(IDIR:%=-I %)
 
 ODIR=obj
 
@@ -21,4 +21,4 @@ holabinario: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
+	@rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
