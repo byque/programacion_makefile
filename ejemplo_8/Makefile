@@ -34,6 +34,7 @@ CFLAGS   += $(IDIR:%=-I %)
 # solamente 'make'
 all: build size
 	@echo $(CFLAGS)
+	@echo $(OBJS)
 
 # Crear todos los archivos
 build: builddirs $(BUILDDIR)/$(TARGET)
