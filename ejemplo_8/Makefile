@@ -6,13 +6,10 @@
 TARGET  = holabinario
 
 # Aquí añadimos todos los archivos *.c que se quieren compilar
-CSRCS   = holafuncion.c holamain.c
+CSRCS   = ../src/holafuncion.c ../src/holamain.c
 
 # Aquí añadimos las rutas a los directorios include
-IDIR    = ../include
-
-# Aquí añadimos las librerías estándar que se van a usar
-LIBS    = -lm
+IDIR    = ../include ../include2 include3
 
 # Configuración del compilador
 CC      = gcc
@@ -23,18 +20,28 @@ LDFLAGS = -g -Wall
 # No cambiar nada después de esta línea                                        #
 ################################################################################
 
-BINDIR   = ../bin
-BUILDDIR = ../build
+BINDIR   = bin
+BUILDDIR = build
 OBJDIR   = $(BUILDDIR)/obj
 
-# Generar el nombre de los archivos objeto
+#------------------------------------------------------------------------------#
+# Generar el nombre de los archivos objeto                                     #
+#------------------------------------------------------------------------------#
+# Establece el archivo objeto como fuente para la compilación cambiando la
+# extensión de .c a .o de los archivos fuente
+# CSRCS:%.c=%.o
+
+# Crea una lista de archivos sin extensión de los archivos fuente
+# basename $(CSRCS:%.c=%.o)
+
+# Crea una lista de archivos con extensión .o de los archivos fuente
+# addsuffix .o,$(basename $(CSRCS:%.c=%.o))
+
+# Establece la ruta y el nombre de cada archivo objeto para la compilación
 OBJS     = $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(CSRCS:%.c=%.o))))
 
-# Añadir las rutas
+# Añadir la ruta de los dierectorios include
 CFLAGS   += $(IDIR:%=-I %)
-
-# Añadir las librerías estándar
-CFLAGS   += $(LIBS)
 
 # Aquí se definen los archivos generados por defecto cuando el usuario llama
 # solamente 'make'
@@ -73,7 +80,7 @@ size: $(BINDIR)/$(TARGET)
 clean:
 	@echo
 	@echo "Limpiando..."
-	@rm -rf $(BINDIR) $(BUILDDIR) $(OBJS) $(TARGET) $(TARGET).* *.a *.o *~
+	rm -rf $(BINDIR) $(BUILDDIR) $(OBJS) $(TARGET) $(TARGET).* *.a *.o *~
 	@echo
 	@echo "Limpieza terminada!"
 
