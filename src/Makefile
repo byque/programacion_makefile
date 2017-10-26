@@ -23,7 +23,7 @@ LDFLAGS = -g -Wall
 # No cambiar nada después de esta línea                                        #
 ################################################################################
 
-# Un poco de magia para directorios y archivos
+BINDIR   = ../bin
 BUILDDIR = ../build
 OBJDIR   = $(BUILDDIR)/obj
 
@@ -39,37 +39,42 @@ CFLAGS   += $(LIBS)
 # Aquí se definen los archivos generados por defecto cuando el usuario llama
 # solamente 'make'
 all: build size
-	@echo $(CFLAGS)
 
-# Crear todos los archivos
-build: builddirs $(BUILDDIR)/$(TARGET)
+# Crear todos los archivos y el binario
+build: builddirs $(BINDIR)/$(TARGET)
 
 # Crear los directorios requeridos (si no existen previamente)
 builddirs:
+	@echo
+	@echo "Creando directorios..."
+	mkdir -p $(BINDIR)
 	mkdir -p $(BUILDDIR)
 	mkdir -p $(OBJDIR)
 
 # Enlazar todo junto
-$(BUILDDIR)/$(TARGET): $(OBJS)
-	@echo Linking $@
-	$(CC) $(LDFLAGS) -o $(BUILDDIR)/$(TARGET) $(OBJS)
+$(BINDIR)/$(TARGET): $(OBJS)
+	@echo
+	@echo Enlazando $@
+	$(CC) $(LDFLAGS) -o $(BINDIR)/$(TARGET) $(OBJS)
 
 # Compilar los archivos en c
 $(OBJDIR)/%.o: %.c
 	mkdir -p $(dir $@)
-	@echo Compiling $^
+	@echo
+	@echo Compilando $^
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 # Imprimir la información del tamaño
-size: $(BUILDDIR)/$(TARGET)
+size: $(BINDIR)/$(TARGET)
 	@echo
-	@echo
-	$^
+	size $^
 
 # Limpiar código
 clean:
-	@echo "Borrando archivos..."
-	@rm -rf $(BUILDDIR) $(OBJS) $(TARGET) $(TARGET).* *.a *.o *~
+	@echo
+	@echo "Limpiando..."
+	@rm -rf $(BINDIR) $(BUILDDIR) $(OBJS) $(TARGET) $(TARGET).* *.a *.o *~
+	@echo
 	@echo "Limpieza terminada!"
 
 # Clean debe ser phony tal que make nunca salga de ejecución como un archivo
