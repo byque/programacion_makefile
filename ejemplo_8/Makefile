@@ -38,10 +38,11 @@ OBJDIR   = $(BUILDDIR)/obj
 # addsuffix .o,$(basename $(CSRCS:%.c=%.o))
 
 # Establece la ruta y el nombre de cada archivo objeto para la compilación
-OBJS     = $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(CSRCS:%.c=%.o))))
+OBJS    = $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(CSRCS:%.c=%.o))))
 
 # Añadir la ruta de los dierectorios include
-CFLAGS   += $(IDIR:%=-I %)
+CFLAGS  += $(IDIR:%=-I %)
+LDFLAGS += $(IDIR:%=-I %)
 
 # Aquí se definen los archivos generados por defecto cuando el usuario llama
 # solamente 'make'
