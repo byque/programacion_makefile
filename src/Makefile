@@ -32,6 +32,7 @@ OBJS     = $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(CSRCS:%.c=%.o))))
 
 # Añadir las rutas
 CFLAGS   += $(IDIR:%=-I %)
+LDFLAGS  += $(IDIR:%=-I %)
 
 # Añadir las librerías estándar
 CFLAGS   += $(LIBS)
@@ -47,22 +48,22 @@ build: builddirs $(BINDIR)/$(TARGET)
 builddirs:
 	@echo
 	@echo "Creando directorios..."
-	mkdir -p $(BINDIR)
-	mkdir -p $(BUILDDIR)
-	mkdir -p $(OBJDIR)
+	@mkdir -p $(BINDIR)
+	@mkdir -p $(BUILDDIR)
+	@mkdir -p $(OBJDIR)
 
 # Enlazar todo junto
 $(BINDIR)/$(TARGET): $(OBJS)
 	@echo
 	@echo Enlazando $@
-	$(CC) $(LDFLAGS) -o $(BINDIR)/$(TARGET) $(OBJS)
+	@$(CC) $(LDFLAGS) -o $(BINDIR)/$(TARGET) $(OBJS)
 
 # Compilar los archivos en c
 $(OBJDIR)/%.o: %.c
-	mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)
 	@echo
 	@echo Compilando $^
-	$(CC) $(CFLAGS) -c -o $@ $^
+	@$(CC) $(CFLAGS) -c -o $@ $^
 
 # Imprimir la información del tamaño
 size: $(BINDIR)/$(TARGET)
